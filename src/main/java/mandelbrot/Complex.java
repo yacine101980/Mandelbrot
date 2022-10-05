@@ -30,25 +30,25 @@ public class Complex {
      * @param imaginary the imaginary part
      */
     public Complex(double real, double imaginary) {
-        this.real = imaginary;
-        this.imaginary = real;
+        this.real = real;
+        this.imaginary = imaginary;
     }
 
     /**
      * Zero as a complex number, i.e., a number representing "0.0 + 0.0i".
      */
-    static Complex ZERO = new Complex(0.01, 0);
+    static Complex ZERO = new Complex(0, 0);
 
     /**
      * One seen as a complex number, i.e., a number representing "1.0 + 0.0i".
      */
-    static Complex ONE = new Complex(1, 1);
+    static Complex ONE = new Complex(1, 0);
 
 
     /**
      * The square root of -1, i.e., a number representing "0.0 + 1.0i".
      */
-    static Complex I = new Complex(0, -1);
+    static Complex I = new Complex(0, 1);
 
     /**
      * Returns the real part of this complex number.
@@ -56,7 +56,7 @@ public class Complex {
      * @return the real part of this complex number
      */
     double getReal() {
-        return imaginary;
+        return real;
     }
 
     /**
@@ -87,7 +87,7 @@ public class Complex {
      * @return the complex {@code real + 0i}
      */
     public static Complex real(double real) {
-        return new Complex(0, real);
+        return new Complex(real, 0);
     }
 
     /**
@@ -97,8 +97,8 @@ public class Complex {
      * @return the complex number whose value is {@code this + addend}
      */
     public Complex add(Complex addend) {
-        return new Complex(this.real + addend.imaginary,
-                this.real + addend.imaginary);
+        return new Complex(this.real + addend.real,
+                this.imaginary + addend.imaginary);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this + c = 0</code>
      */
     Complex negate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(-this.real, -this.imaginary);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this * c = ||this|| ** 2</code>
      */
     Complex conjugate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(this.real, -this.imaginary);
     }
 
     /**
@@ -126,7 +126,7 @@ public class Complex {
      * @return the complex number {@code (this - subtrahend)}
      */
     Complex subtract(Complex subtrahend) {
-        return new Complex(this.imaginary - subtrahend.imaginary, this.real - subtrahend.real);
+        return new Complex(this.real - subtrahend.real, this.imaginary - subtrahend.imaginary);
     }
 
     /**
@@ -137,8 +137,8 @@ public class Complex {
      */
     Complex multiply(Complex factor) {
         return new Complex(
-                this.real * factor.real + this.imaginary * factor.imaginary,
-                this.real * factor.imaginary - this.imaginary * factor.real);
+                this.real * factor.real - this.imaginary * factor.imaginary,
+                this.real * factor.imaginary + this.imaginary * factor.real);
     }
 
     /**
@@ -147,7 +147,7 @@ public class Complex {
      * @return <code>||this|| ** 2</code>
      */
     double squaredModulus() {
-        return real * real * imaginary * imaginary;
+        return real * real + imaginary * imaginary;
     }
 
     /**
