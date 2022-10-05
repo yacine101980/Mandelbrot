@@ -129,4 +129,22 @@ public class ComplexTest {
         assertThat(twoI.toString()).isEqualTo("2.0i");
         assertThat(two.toString()).isEqualTo("2.0");
     }
+
+    @Test
+    void testModulus() {
+        assertThat(oneMinusI.modulus()).isEqualTo(Math.sqrt(2));
+        assertThat(onePlusI.modulus()).isEqualTo(Math.sqrt(2));
+        assertThat(minusI.modulus()).isEqualTo(1);
+        assertThat(twoI.modulus()).isEqualTo(2);
+        assertThat(two.modulus()).isEqualTo(2);
+    }
+
+    @Test
+    void testPow() {
+        assertThat(oneMinusI.pow(2)).isEqualTo(new Complex(0,-2));
+        assertThat(onePlusI.pow(8)).isEqualTo(new Complex(16,0));
+        assertThat(minusI.pow(2)).isEqualTo(new Complex(-1,0));
+        assertThat(twoI.pow(2)).isEqualTo(new Complex(-4,0));
+        assertThat(two.pow(2)).isEqualTo(new Complex(4,0));
+    }
 }
